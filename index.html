@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Physics Contest Registration</title>
+  <title>Registratro en el Concurso de Física</title>
   <style>
     body { font-family: system-ui, -apple-system, sans-serif; background: #f5f7fa; display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; }
     .container { background: white; padding: 2rem; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); width: 100%; max-width: 420px; }
@@ -20,27 +20,27 @@
     .message.error { background: #fee2e2; color: #991b1b; display: block; }
   </style>
 </head>
-<body>
+<body style="background-image: url('images/newton_sky.jpg'); background-attachment:fixed; background-repeat: no-repeat; background-size: cover;">
   <div class="container">
-    <h1>Physics Contest Registration</h1>
+    <h1>Concurso: Constantes en un Universo Pixelado</h1>
     <form id="regForm">
       <div class="form-group">
-        <label for="fullName">Full Name</label>
+        <label for="fullName">Nombre completo</label>
         <input type="text" id="fullName" name="fullName" required placeholder="Jane Doe">
       </div>
       <div class="form-group">
-        <label for="school">School</label>
+        <label for="school">Escuela</label>
         <input type="text" id="school" name="school" required placeholder="Lincoln High School">
       </div>
       <div class="form-group">
-        <label for="year">Year / Grade</label>
+        <label for="year">Año / Grado</label>
         <input type="text" id="year" name="year" required placeholder="e.g., 11th Grade">
       </div>
       <div class="form-group">
-        <label for="email">Email Address</label>
+        <label for="email">Dirección de Email</label>
         <input type="email" id="email" name="email" required placeholder="jane@example.com">
       </div>
-      <button type="submit" id="submitBtn">Register & Get Login Link</button>
+      <button type="submit" id="submitBtn">Registrarse y luego entrar</button>
       <div id="message" class="message"></div>
     </form>
   </div>
@@ -52,7 +52,7 @@
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
       btn.disabled = true;
-      btn.textContent = 'Sending...';
+      btn.textContent = 'Enviando...';
       msg.className = 'message';
       msg.style.display = 'none';
 
@@ -66,18 +66,18 @@
         });
         const result = await res.json();
         if (result.success) {
-          msg.textContent = '✅ Registration successful! Check your email for the login link and contest details.';
+          msg.textContent = '✅ Registrado con éxito! Revisa tu correo electrónico para el enlace de inicio de sesión y los detalles del concurso.';
           msg.classList.add('success');
           form.reset();
         } else {
-          throw new Error(result.error || 'Registration failed');
+          throw new Error(result.error || 'Registro fallido');
         }
       } catch (err) {
-        msg.textContent = err.message || '❌ Something went wrong. Please try again.';
+        msg.textContent = err.message || '❌ Algo salió mal. Por favor, inténtalo de nuevo.';
         msg.classList.add('error');
       } finally {
         btn.disabled = false;
-        btn.textContent = 'Register & Get Login Link';
+        btn.textContent = 'Registrarse y luego loggearse';
       }
     });
   </script>
