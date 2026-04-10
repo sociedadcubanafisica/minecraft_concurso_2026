@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Physics Contest Registration</title>
+  <style>
+    body { font-family: system-ui, -apple-system, sans-serif; background: #f5f7fa; display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; }
+    .container { background: white; padding: 2rem; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); width: 100%; max-width: 420px; }
+    h1 { margin: 0 0 1.5rem; font-size: 1.5rem; text-align: center; color: #111827; }
+    .form-group { margin-bottom: 1rem; }
+    label { display: block; margin-bottom: 0.5rem; font-weight: 500; color: #374151; }
+    input { width: 100%; padding: 0.75rem; border: 1px solid #d1d5db; border-radius: 6px; font-size: 1rem; box-sizing: border-box; }
+    input:focus { outline: none; border-color: #2563eb; box-shadow: 0 0 0 2px rgba(37,99,235,0.2); }
+    button { width: 100%; padding: 0.75rem; background: #2563eb; color: white; border: none; border-radius: 6px; font-size: 1rem; font-weight: 600; cursor: pointer; transition: background 0.2s; }
+    button:hover { background: #1d4ed8; }
+    button:disabled { background: #9ca3af; cursor: not-allowed; }
+    .message { margin-top: 1rem; padding: 0.75rem; border-radius: 6px; text-align: center; display: none; }
+    .message.success { background: #d1fae5; color: #065f46; display: block; }
+    .message.error { background: #fee2e2; color: #991b1b; display: block; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Physics Contest Registration</h1>
+    <form id="regForm">
+      <div class="form-group">
+        <label for="fullName">Full Name</label>
+        <input type="text" id="fullName" name="fullName" required placeholder="Jane Doe">
+      </div>
+      <div class="form-group">
+        <label for="school">School</label>
+        <input type="text" id="school" name="school" required placeholder="Lincoln High School">
+      </div>
+      <div class="form-group">
+        <label for="year">Year / Grade</label>
+        <input type="text" id="year" name="year" required placeholder="e.g., 11th Grade">
+      </div>
+      <div class="form-group">
+        <label for="email">Email Address</label>
+        <input type="email" id="email" name="email" required placeholder="jane@example.com">
+      </div>
+      <button type="submit" id="submitBtn">Register & Get Login Link</button>
+      <div id="message" class="message"></div>
+    </form>
+  </div>
+  <script>
+    const form = document.getElementById('regForm');
+    const btn = document.getElementById('submitBtn');
+    const msg = document.getElementById('message');
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      btn.disabled = true;
+      btn.textContent = 'Sending...';
+      msg.className = 'message';
+      msg.style.display = 'none';
+
+      const data = Object.fromEntries(new FormData(form));
+
+      try {
+        const res = await fetch('/api/register', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data)
+        });
+        const result = await res.json();
+        if (result.success) {
+          msg.textContent = '✅ Registration successful! Check your email for the login link and contest details.';
+          msg.classList.add('success');
+          form.reset();
+        } else {
+          throw new Error(result.error || 'Registration failed');
+        }
+      } catch (err) {
+        msg.textContent = err.message || '❌ Something went wrong. Please try again.';
+        msg.classList.add('error');
+      } finally {
+        btn.disabled = false;
+        btn.textContent = 'Register & Get Login Link';
+      }
+    });
+  </script>
+</body>
+</html>
