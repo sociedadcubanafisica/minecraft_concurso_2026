@@ -43,6 +43,10 @@
       <button type="submit" id="submitBtn">Registrarse y luego entrar</button>
       <div id="message" class="message"></div>
     </form>
+    <div id="successDiv" class="message success" style="display: none;">
+      <p>Su inscripción ha sido recibida. Un correo electrónico le fue enviado a su dirección email. Revísela en 1 o 2 minutos. Siga las instrucciones enviadas en PDF.</p>
+      <p><a href="#" onclick="showForm()">Registrar otro participante</a></p>
+    </div>
   </div>
   <script>
     const form = document.getElementById('regForm');
@@ -66,9 +70,8 @@
         });
         const result = await res.json();
         if (result.success) {
-          msg.textContent = '✅ Registrado con éxito! Revisa tu correo electrónico para el enlace de inicio de sesión y los detalles del concurso.';
-          msg.classList.add('success');
-          form.reset();
+          form.style.display = 'none';
+          document.getElementById('successDiv').style.display = 'block';
         } else {
           throw new Error(result.error || 'Registro fallido');
         }
@@ -80,6 +83,13 @@
         btn.textContent = 'Registrarse y luego loggearse';
       }
     });
+
+    function showForm() {
+      form.style.display = 'block';
+      document.getElementById('successDiv').style.display = 'none';
+      form.reset();
+      msg.style.display = 'none';
+    }
   </script>
 </body>
 </html>
