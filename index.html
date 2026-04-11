@@ -7,12 +7,13 @@
   <style>
     body { font-family: system-ui, -apple-system, sans-serif; background: #f5f7fa; display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; }
     .container { background: url('images/newton_sky.jpg') no-repeat center center / cover; padding: 2rem; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); width: 100%; max-width: 420px; }
-    h1 { margin: 0 0 1.5rem; font-size: 1.5rem; text-align: center; color: #111827; }
-    .form-group { margin-bottom: 1rem; }
+    h1 { margin: 0 0 2rem; font-size: 1.5rem; text-align: center; color: #111827; }
+    .form-group { margin-bottom: 1.5rem; }
+    .form-group:first-child { margin-top: 1rem; }
     label { display: block; margin-bottom: 0.5rem; font-weight: 500; color: #374151; }
-    input { width: 100%; padding: 0.75rem; border: 1px solid #d1d5db; border-radius: 6px; font-size: 1rem; box-sizing: border-box; }
+    input { width: 100%; padding: 0.5rem; border: 1px solid #d1d5db; border-radius: 6px; font-size: 1rem; box-sizing: border-box; }
     input:focus { outline: none; border-color: #2563eb; box-shadow: 0 0 0 2px rgba(37,99,235,0.2); }
-    button { width: 100%; padding: 0.75rem; background: #2563eb; color: white; border: none; border-radius: 6px; font-size: 1rem; font-weight: 600; cursor: pointer; transition: background 0.2s; }
+    button { width: 40%; padding: 0.5rem; background: #2563eb; color: white; border: none; border-radius: 6px; font-size: 1rem; font-weight: 600; cursor: pointer; transition: background 0.2s; margin-bottom: 13rem; }
     button:hover { background: #1d4ed8; }
     button:disabled { background: #9ca3af; cursor: not-allowed; }
     .message { margin-top: 1rem; padding: 0.75rem; border-radius: 6px; text-align: center; display: none; }
@@ -22,15 +23,15 @@
 </head>
 <body>
   <div class="container">
-    <h1>Concurso: Constantes en un Universo Pixelado</h1>
+    <h1><p>  Concurso </p>  <p> Constantes en un Universo Pixelado</p></h1>
     <form id="regForm">
       <div class="form-group">
         <label for="fullName">Nombre completo</label>
-        <input type="text" id="fullName" name="fullName" required placeholder="Jane Doe">
+        <input type="text" id="fullName" name="fullName" required placeholder="Mario Diaz">
       </div>
       <div class="form-group">
         <label for="school">Escuela</label>
-        <input type="text" id="school" name="school" required placeholder="Lincoln High School">
+        <input type="text" id="school" name="school" required placeholder="Universidad de la Habana">
       </div>
       <div class="form-group">
         <label for="year">Año / Grado</label>
@@ -40,11 +41,12 @@
         <label for="email">Dirección de Email</label>
         <input type="email" id="email" name="email" required placeholder="jane@example.com">
       </div>
-      <button type="submit" id="submitBtn">Registrarse y luego entrar</button>
+      <button type="submit" id="submitBtn">Registrarse </button>
       <div id="message" class="message"></div>
     </form>
     <div id="successDiv" class="message success" style="display: none;">
-      <p>Su inscripción ha sido recibida. Un correo electrónico le fue enviado a su dirección email. Revísela en 1 o 2 minutos. Siga las instrucciones enviadas en PDF.</p>
+      <p>Su inscripción ha sido recibida. </p> 
+      <p>Un correo electrónico le fue enviado a su dirección email. Revísela en 1 o 2 minutos. Siga las instrucciones enviadas en PDF.</p>
       <p><a href="#" onclick="showForm()">Registrar otro participante</a></p>
     </div>
   </div>
